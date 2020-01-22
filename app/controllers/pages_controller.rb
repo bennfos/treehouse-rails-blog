@@ -8,4 +8,19 @@ class PagesController < ApplicationController
 
   end
 
+  def new
+    @page = Page.new
+  end
+
+  def create
+    page_params = params.require(:page).permit(:title, :body, :slug)
+    @page = Page.new(page_params)
+    @page.save
+    redirect_to @page
+  end
+
+
+    def edit
+      @page = Page.find(params[:id])
+    end
 end
